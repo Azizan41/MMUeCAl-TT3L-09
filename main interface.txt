@@ -9,6 +9,5 @@
     <label for="ID" class="ID_form">ID:</label>
      <input type="ID" name="ID">
      <input type="submit">
-</form>
 </body>
 </html>
