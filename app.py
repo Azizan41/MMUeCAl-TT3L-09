@@ -7,7 +7,11 @@ def main():
     if request.method == "POST":
         ID = request.form.get('ID')
         print(ID)
-    return render_template()
+    return render_template("maininterface.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route("/users")
+def show_ID():
+    return render_template("ID_list.html")
