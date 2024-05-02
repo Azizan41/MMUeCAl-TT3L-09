@@ -1,22 +1,32 @@
 <!DOCTYPE html>
-<html lang="eng">
-<title>MMU ECAL | MAIN</title>
+<html lang="en">
+
 <head>
-    <h1><b>LOG IN</b></h1>
-    <link rel="stylesheet" href="style.css"/>
-   
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE-edge">
+    <meta name="viewport" content="width-device-width,initial-scale=1.0">
+    <title>MMU E-CAL | HOME</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-    <form method="POST" autocomplete="off">
-    <label for="ID" class="ID_form">ID:</label>
-     <input type="ID" name="ID">
-     <input type="submit">
-     <section class="header">
-        <nav>
-           
-        </nav>
-
-     </section>
+    <div class="wrapper">
+        <form action="">
+            <h1>LOG IN</h1>
+            <div class="input-box">
+                <i class='bx bx-user'></i>
+                <input type="text" placeholder="MMU ID" required>
+            </div>
+            <div class="input-box">
+                <i class='bx bx-lock-alt'></i>
+                <input type="password" placeholder="PASSWORD" required>
+            </div>
+            <button type="submit" class="btn">LOGIN</button>
+        <div class="register-link">
+            <p>New User? <a href="#">Sign Up</a></p>
+        </div>
+        </form>
+    </div>
 </body>
 </html>
