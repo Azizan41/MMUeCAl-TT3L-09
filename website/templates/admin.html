@@ -1,0 +1,29 @@
+
+
+<table class="addfoodtable">
+    <thead>
+        <tr>
+            <th scope="'col">Product Name</th>
+            <th scope="'col">Price</th>
+            <th scope="'col">In Stock</th>
+            <th scope="'col">Picture</th>
+            <th scope="'col">Add</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <form action="" method="POST" enctype="multipart/form-data">
+
+                {{ form.hidden_tag() }}
+                <td>{{ form.product_name }}</td>
+                <td>{{ form.product_price }}</td>
+                <td>{{ form.in_stock }}</td>
+                <td>{{ form.product_picture }}</td>
+                <td>{{ form.add_product }}</td>
+            </form>
+        </tr>
+    </tbody>
+
+
+</table>
