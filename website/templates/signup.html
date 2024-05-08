@@ -1,0 +1,43 @@
+{% block title %}Sign Up{% endblock %}
+{% block content %} 
+
+<form method="POST">
+    <h1 align="center">Sign Up</h1>
+    <div class="form-group">
+        <label for="student_id">ID</label>
+        <input 
+           type="number" 
+           class="form-control" 
+           id="student_id" 
+           name="student_id" 
+           placeholder="Enter ID"
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="password1">Enter Password</label>
+        <input 
+           type="password" 
+           class="form-control" 
+           id="password1" 
+           name="password1" 
+           placeholder="Enter Password"
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="password2">Confirm Password</label>
+        <input 
+           type="password" 
+           class="form-control" 
+           id="password2" 
+           name="password2" 
+           placeholder="Confirm Password"
+        />
+    </div>
+
+<br />
+<button type = "submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}
