@@ -58,6 +58,7 @@ def daily_calorie_needs_and_count_calories():
 
     print("Your daily calorie needs are: ", daily_calories)
 
+    print("Please input your meal. If there is nothing more type 'done'.")
     total_calories = 0
     while True:
         meal_input = input("Meal: ")
