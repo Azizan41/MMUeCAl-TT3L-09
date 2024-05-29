@@ -1,13 +1,32 @@
-
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>profile</title>
-    </head>
-    <body>
-        <h1>profile</h1>
-        <a href="/change-password">CHANGE PASSWORD</a>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/static/style_profile.css">
+</head>
+<body>
+
+
+      
+    
+
+   <div class="container">
+    <div class="profile-box">
+        <a href="/home"><img src="/static/images/profile-menu.png" class="menu-icon"></a>
+        <a href="/change-password"><img src="/static/images/profile-setting.png" class="setting-icon"></a>
+        <img src="/static/images/profile-pic.png" class="profile-pic">
+        <h3> {{ user.student_id }} </h3>
+        <p> {{ user.username }} </p>
+        <div class="profile-buttom">
+            <p>Info</p>
+        </div>
+    </div>
+   </div>
+   
+
+
+
+
 </html>

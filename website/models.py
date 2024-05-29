@@ -12,10 +12,12 @@ class Weight(db.Model):
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, unique=True)
+    username = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(50))
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+    admin = db.Column(db.Boolean)
 
-    cart_items = db.relationship('Cart', backref=db.backref('uer', lazy=True))
+    cart_items = db.relationship('Cart', backref=db.backref('user', lazy=True))
     orders = db.relationship('Order', backref=db.backref('user', lazy=True))
 
 
@@ -40,7 +42,7 @@ class Cart(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
 
     customer_link = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    product_link = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    product_link = db.Column(db.String(100), db.ForeignKey('product.product_name'), nullable=False)
 
 
 
@@ -53,4 +55,10 @@ class Order(db.Model):
     payment_id = db.Column(db.String(1000), nullable=True)
 
     customer_link = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    product_link = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    product_link = db.Column(db.String(100), db.ForeignKey('product.product_name'), nullable=False)
+
+class Venue(db.Model):
+    __tablename__ = 'distance'
+    id = db.Column(db.Integer, primary_key=True)
+    venue_name = db.Column(db.String(100), unique=True, nullable=False)
+    venue_steps = db.Column(db.Float, nullable=False)
