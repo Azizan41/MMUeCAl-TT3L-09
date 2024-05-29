@@ -12,21 +12,6 @@ def int_input(prompt):
         except ValueError:
             print("Invalid input. Please enter an integer.")
 
-def gender_input(prompt):
-    while True:
-        gender = input(prompt).lower()
-        if gender == "male" or gender == "female":
-            return gender
-        else:
-            print("Invalid input. Please enter 'male' or 'female'.")
-
-def activity_level_input(prompt):
-    while True:
-        activity_level = input(prompt).lower()
-        if activity_level == "sedentary" or activity_level == "lightly active" or activity_level == "moderately active" or activity_level == "very active":
-            return activity_level
-        else:
-            print("Invalid input. Please enter 'sedentary', 'lightly active', 'moderately active', or 'very active'.")
 
 def calculate_bmr(weight, height, age, gender):
     if gender == "male":

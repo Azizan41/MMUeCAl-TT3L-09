@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, Flask, request, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from .models import User
 
@@ -24,6 +24,20 @@ def profile():
     user_id = current_user.id
     return render_template('profile.html', user_id=user_id)
 
+# @views.route('/caloriecounter' , method = ['POST'])
+# @login_required
+# def calorie_counter():
+#     weight = request.form.get('weight')
+#     height = request.form.get('height')
+#     age = request.form.get('age')
+#     gender = request.form.get('gender')
+#     activity = request.form.get('activity')
+
+#     daily_calories = calculate_daily_calories(weight, height, age, gender, activity)
+
+#     return render_template('result.html', daily_calories=daily_calories)
+
+
 @views.route('/caloriecounter')
 @login_required
 def calorie_counter():
@@ -33,6 +47,15 @@ def calorie_counter():
 @login_required
 def step_counter():
     return render_template("stepcounter.html")
+
+@views.route('/exercise')
+def exercise():
+    # exercises = [
+    #     {'name': 'Squats', 'description': 'A lower body exercise'},
+    #     {'name': 'Push-ups', 'description': 'An upper body exercise'},
+    #     {'name': 'Sit-ups', 'description': 'A core exercise'},
+    # ]
+    return render_template('exercise.html')
 
 
 
