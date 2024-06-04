@@ -1,38 +1,46 @@
-
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>profile</title>
-    </head>
-    <body>
-        <h1>profile</h1>
-        <a href="/change-password">CHANGE PASSWORD</a>
-        <body>
-            <h2>Your daily calories intake counter</h2>
-            <form action="{% url 'calorie_counter' %}" method="post">
-              <label for="weight">Please enter your weight (kg):</label>
-              <input type="number" id="weight" name="weight"><br>
-              <label for="height">Please enter your height (cm):</label>
-              <input type="number" id="height" name="height"><br>
-              <label for="age">Please enter your age:</label>
-              <input type="number" id="age" name="age"><br>
-              Gender:
-              <input type="radio" name="gender" value="female">Female
-              <input type="radio" name="gender" value="male">Male
-              <br>
-              <label for="activity">Choose your activity level:</label>
-              <input list="activities" name="activity" id="activity">
-              <datalist id="activities">
-                <option value="sedentary">
-                <option value="lightly active">
-                <option value="moderately active">
-                <option value="very active">
-              </datalist>
-              <br>
-              <input type="submit" value="Calculate">
-            </form>
-          </body>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/static/style_profile.css">
+</head>
+<body>
+   <div class="container">
+    <div class="profile-box">
+        <a href="/home"><img src="/static/images/profile-menu.png" class="menu-icon"></a>
+        <a href="/change-password"><img src="/static/images/profile-setting.png" class="setting-icon"></a>
+        <img src="/static/images/profile-pic.png" class="profile-pic">
+        <h3> {{ user.student_id }} </h3>
+        <p> {{ user.username }} </p>
+        <div class="profile-buttom">
+            <p>Info</p>
+        </div>
+    </div>
+   </div>
+   <h2>Your daily calories intake counter</h2>
+        <form action="{% url 'calorie_counter' %}" method="post">
+          <label for="weight">Please enter your weight (kg):</label>
+          <input type="number" id="weight" name="weight"><br>
+          <label for="height">Please enter your height (cm):</label>
+          <input type="number" id="height" name="height"><br>
+          <label for="age">Please enter your age:</label>
+          <input type="number" id="age" name="age"><br>
+          Gender:
+          <input type="radio" name="gender" value="female">Female
+          <input type="radio" name="gender" value="male">Male
+          <br>
+          <label for="activity">Choose your activity level:</label>
+          <input list="activities" name="activity" id="activity">
+          <datalist id="activities">
+          <option value="sedentary">
+          <option value="lightly active">
+          <option value="moderately active">
+          <option value="very active">
+          </datalist>
+          <br>
+          <input type="submit" value="Calculate">
+        </form>
+</body>
 </html>

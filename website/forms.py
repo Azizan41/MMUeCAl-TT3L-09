@@ -11,3 +11,10 @@ class ShopItemsForm(FlaskForm):
 
     add_product = SubmitField('Add Product')
     update_product = SubmitField('update')
+
+class PasswordChangeForm(FlaskForm):
+    current_password = PasswordField('Current Password', validators=[DataRequired(), length(min=6)])
+    new_password = PasswordField('New Password' ,validators=[DataRequired(), length(min=6)])
+    confirm_new_password = PasswordField('New Password', validators=[DataRequired(), length(min=6)])
+    change_password = SubmitField('Change Password')
+    

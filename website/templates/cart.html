@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+
+    <h1> My Cart</h1>
+
+    <div class="">
+        <div class="">
+
+
+            {% if cart %}
+
+
+            <h1> MY CART </h1>
+            <div class="colum">
+                <div class="card">
+                    <div class="card inside">
+
+                        {% for product in cart %}
+
+                        <div class="row">
+                            <div class="col inside">
+
+                               <img src="{{ product.product.product_picture }}" alt="" class="image view boostrap">  
+
+                            </div>
+                            <div class="colum 2">
+                                <div>
+                                    <h3>{{ product.product.product_name }}</h3>
+                                    <div class="my-3">
+                                        <label for="quantity">Quantity</label>
+                                        <a href="" class="remove item">  </a>
+                                        <span id="quantity">{{ product.quantity}}</span>
+                                        <a href="" class="plus cart">  </a>
+
+                                    </div>
+
+                                    <div class="price product">
+                                        <p class="price view"><span><strong>RM {{ profuct.product.product_price}}</strong></span></p>
+                                        <a href="" class="remove button cart">Remove</a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-final-view">
+                <div class="card">
+                    <div class="card inside">
+                        <h3>Cart Summary</h3>
+                        <hr color="black">
+                        <ul class="listing">
+                            {% for product in cart %}
+
+                            <li class="list product">
+                                <strong>{{ product.product.product_name}}</strong>
+                                <span id="amount">{{ product.product.product_price}} X 
+                                <span> {{product.product.quantity}}</span></span></li>
+
+                            {% endfor %}
+                           
+                        </ul>
+
+                        <div class="grid"><a href="#" class="button">Place Order</a></div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% else %}
+
+            <h1> Your Cart is Empty</h1>
+
+            {% endif %}
+
+        </div>
+    </div>
+    <body>
+     
+</html>

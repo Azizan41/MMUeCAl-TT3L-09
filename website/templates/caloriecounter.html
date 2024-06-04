@@ -1,12 +1,46 @@
-{% extends "base.html" %}
 
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>calorie counter</title>
-    </head>
-    <body>
-        <h1>calorie counter</h1>
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"/>
+    <link rel="stylesheet" href="/static/stepburner.css"/>
+    <title>MMU E-CAL | Step Burner</title>
+  </head>
+
+  <body>
+    <nav>
+        <div class="nav__header">
+            <div class="nav__back">
+             <a href="/home"><i class="ri-arrow-go-back-line"></i></a>
+            </div>
+    </nav>
+<div class="container">
+    <div class="box">
+        <u><h2>ENTER YOUR START/END LOCATION</h2></u>
+        <label class="sp">Starting Point</label>
+        <input list="checkpoint">
+        <datalist id="checkpoint">
+            <option value="Faculty Of Computing Informatics (FCI)"></option>
+            <option value="Faculty Of Creative Multimedia (FCM)"></option>
+            <option value="Faculty Of Management (FOM)"></option>
+            <option value="Faculty Of Engineering (FOE)"></option>
+            <option value="Hostel Building"></option>
+        </datalist>
+        <label class="ep">End Point</label>
+        <input list="checkpoint">
+        <datalist id="checkpoint">
+            <option value="Faculty Of Computing Informatics (FCI)"></option>
+            <option value="Faculty Of Creative Multimedia (FCM)"></option>
+            <option value="Faculty Of Management (FOM)"></option>
+            <option value="Faculty Of Engineering (FOE)"></option>
+            <option value="Hostel Building"></option>
+        </datalist>
+        <button>Calculate</button>
+    </div>
+</div>
+  </body>
 </html>
