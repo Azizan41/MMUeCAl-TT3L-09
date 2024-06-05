@@ -5,90 +5,56 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Exercise</title>
+        <link rel="stylesheet" href="/static/style_exercise.css">
+        <title>MMU E-CAL | EXERCISE</title>
     </head>
 
     <body>
         <h2>Sample Exercise</h2>
         <p>Exercise that could be chosen based on personnel preference.</p>
 
-        <div class="row">
+        <div class="ex-container">
 
-            <div class="column" style="background-color:#5fa5dac0;">
-                <h2>Simple Exercise</h2>
-                <ul>
-                    {% for exercise in exercises %}
-                      <li>{{ exercise.name }} - {{ exercise.description }}</li>
-                    {% endfor %}
-                  </ul>
-                <p>Exercise that could be done easily, indoor and multiple times</p>
-                <img src="/static/images/plank.jpg" alt="Plank" />
-                <h4>1 minutes of plank will burn about 3 to 4 calories</h4>
-                <img src="/assets/pilates.jpg" alt="Pilates" />
-                <h4>20 minutes session of pilates will burn 83 to 150 calories</h4>
-                <img src="/assets/Pushups.jpg" alt="Push ups" />
-                <h4>10 push up will burn on average 3.2 calories</h4>
-                <img src="/static/images/squat.jpg" alt="Squat" />
-                <h4>20 squats will burn on average 6.4 calories</h4>
+            <div class="ex-card" >
+                <h2 class="ex-title">Simple Exercise</h2>
+                <p class="ex-description">Exercise that could be done easily, indoor and multiple times</p>
+                <img src="/static/images/plank.jpg" alt="Plank" class="ex-image"/>
+                <p class="ex-description">1 minutes of plank will burn about 3 to 4 calories</p>
+                <img src="/static/images/pilates.jpg" alt="Pilates" class="ex-image"/>
+                <p class="ex-description">20 minutes session of pilates will burn 83 to 150 calories</p>
+                <img src="/static/images/Pushups.jpg" alt="Push ups" class="ex-image"/>
+                <p class="ex-description">10 push up will burn on average 3.2 calories</p>
+                <img src="/static/images/squat.jpg" alt="Squat" class="ex-image"/>
+                <p class="ex-description">20 squats will burn on average 6.4 calories</p>
             </div>
 
-            <div class="column" style="background-color:#61d0b6c0;">
-                <h2>Outdoor exercise</h2>
-                <p>Need to allocate times for it</p>
-                <img src="/assets/hiking.jpg" alt="Hiking" />
-                <h4>Depends on the person the calories burn will be varied usually around 400 to 600 calories</h4>
-                <img src="/assets/jogging.jpg" alt="Jogging" />
-                <h4>1 km of jogging will burn about 60 calries</h4>
-                <img src="/assets/biking.jpg" alt="Biking" />
-                <h4>Every hour of biking will usually burn around 300 to 600 calories</h4>
-                <img src="/assets/outdoor circuit.jpg" alt="Outside-circuit" />
-                <h4>Depends on the person a general outdoor circuit will burn around 240 to 360 calories</h4>
+            <div class="ex-card" >
+                <h2 class="ex-title">Outdoor exercise</h2>
+                <p class="ex-description">Need to allocate times for it</p>
+                <img src="/static/images/hiking.jpg" alt="Hiking" class="ex-image"/>
+                <p class="ex-description">Depends on the person the calories burn will be varied usually around 400 to 600 calories</p>
+                <img src="/static/images/jogging.jpg" alt="Jogging" class="ex-image"/>
+                <p class="ex-description">1 km of jogging will burn about 60 calries</p>
+                <img src="/static/images/biking.jpg" alt="Biking" class="ex-image"/>
+                <p class="ex-description">Every hour of biking will usually burn around 300 to 600 calories</p>
+                <img src="/static/images/outdoor circuit.jpg" alt="Outside-circuit" class="ex-image"/>
+                <p class="ex-description">Depends on the person a general outdoor circuit will burn around 240 to 360 calories</p>
             </div>
 
-            <div class="column" style="background-color:#a650dbc0;">
-                <h2>Heavy Exercise</h2>
-                <p>Need to have gym equipment or go to the gym</p>
-                <img src="/assets/bench press.jpg" alt="Bench-press" />
-                <h4>Depending on the amount of reps and the weight used usually from 180 to 540 calories</h4>
-                <img src="/assets/curl bar.jpg" alt="Curl-bar" />
-                <h4>Depending on the amount of reps and the weight usually from 110 to 440 calories</h4>
-                <img src="/assets/pull down.jpg" alt="Pull-down" />
-                <h4>Depending on the amount of reps and the weight usually from 100 to 400 calories</h4>
-                <img src="/assets/seated-leg-press.jpg" alt="Seated-leg-press" />
-                <h4>Depending on the amount of reps and the weight usually from 75 to 300 calories</h4>
+            <div class="ex-card" >
+                <h2 class="ex-title">Heavy Exercise</h2>
+                <p class="ex-description">Need to have gym equipment or go to the gym</p>
+                <img src="/static/images/bench press.jpg" alt="Bench-press" class="ex-image"/>
+                <p class="ex-description">Depending on the amount of reps and the weight used usually from 180 to 540 calories</p>
+                <img src="/static/images/curl bar.jpg" alt="Curl-bar" class="ex-image"/>
+                <p class="ex-description">Depending on the amount of reps and the weight usually from 110 to 440 calories</p>
+                <img src="/static/images/pull-down.jpg" alt="Pull-down" class="ex-image"/>
+                <p class="ex-description">Depending on the amount of reps and the weight usually from 100 to 400 calories</p>
+                <img src="/static/images/seated-leg-press.jpg" alt="Seated-leg-press" class="ex-image"/>
+                <p class="ex-description">Depending on the amount of reps and the weight usually from 75 to 300 calories</p>
             </div>
 
         </div>
     </body>
 
-    <style>
-        * {
-        box-sizing: border-box;
-        }
-
-        .column {
-        float: left;
-        width: 33.33%;
-        padding: 10px;
-        }
-
-        .row:after {
-        content: "";
-        display: table;
-        clear: both;
-        }
-
-        @media screen and (max-width: 600px) {
-        .column {
-            width: 100%;
-        }
-        }
-
-        img {
-            width:  250px;
-            height: 250px;
-            object-fit: cover;
-        }
-
-    </style>
 </html>

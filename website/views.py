@@ -1,4 +1,3 @@
-
 from flask import Blueprint, render_template, request, flash, redirect, request
 from flask_login import login_required, current_user
 from .models import User, Product, Cart
@@ -28,20 +27,6 @@ def profile():
     user = User.query.filter_by(id=current_user.id).first()
     return render_template('profile.html', user=user)
 
-# @views.route('/caloriecounter' , method = ['POST'])
-# @login_required
-# def calorie_counter():
-#     weight = request.form.get('weight')
-#     height = request.form.get('height')
-#     age = request.form.get('age')
-#     gender = request.form.get('gender')
-#     activity = request.form.get('activity')
-
-#     daily_calories = calculate_daily_calories(weight, height, age, gender, activity)
-
-#     return render_template('result.html', daily_calories=daily_calories)
-
-
 @views.route('/caloriecounter')
 @login_required
 def calorie_counter():
@@ -52,6 +37,10 @@ def calorie_counter():
 def step_counter():
     return render_template("stepcounter.html")
 
+@views.route('/exercise')
+@login_required
+def exercise():
+    return render_template("exercise.html")
 
 @views.route('/cart/<string:product_name>')
 @login_required
@@ -98,7 +87,7 @@ def show_cart():
 
 
 
-@views.route('/exercise')
-def exercise():
-    return render_template('exercise.html')
+
+
+
 
