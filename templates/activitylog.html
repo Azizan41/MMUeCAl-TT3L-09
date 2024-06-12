@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Log</title>
+    <link rel="stylesheet" href="static/activitylog.css">
+</head>
+<body>
+    <header>
+        <h1>Activity Log</h1>
+    </header>
+    <main class="scroll-container">
+        {% for date, activities in activity_grouped.items() %}
+            <section class="activity-day">
+                <h2 class="date">{{ date }}</h2>
+                <ul class="activity-list">
+                    <li class="calories">
+                        <strong>Total Calories burned: {{ total_calories_burned[date] }} kcal</strong>
+                    </li>
+                    <li class="calories">
+                        <strong>Total Calories consumed: {{ total_calories_consumed[date] }} kcal</strong>
+                    </li>
+
+                    {% set available_calories = total_calories_consumed[date] - total_calories_burned[date] %}
+                    <li class="available-calories">
+                        <h2>
+                            <strong>Available Calories: {{ available_calories if available_calories >= 0 else 0 }} kcal</strong>
+                        </h2>
+                    </li>
+                    {% if available_calories < 0 %}
+                        <li class="exceed-warning">
+                            <h1><strong>YOU HAVE EXCEEDED {{ available_calories * -1 }} kcal</strong></h1>
+                        </li>
+                    {% endif %}
+                </ul>
+            </section>
+        {% endfor %}
+    </main>
+</body>
+</html>
