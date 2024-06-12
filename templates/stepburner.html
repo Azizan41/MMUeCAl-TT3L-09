@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
-      rel="stylesheet"/>
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/stepburner.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stepburner.css') }}">
     <title>MMU E-CAL | STEP BURNER</title>   
 </head>
 <body>
@@ -16,28 +14,28 @@
             <a href="#">MMU E-CAL</a>
           </div>
           <div class="nav__back" id="menu-back">
-              <i class="ri-corner-down-left-line"></i>
+              <a href="/home"><i class="ri-corner-down-left-line"></i></a>
           </div>
         </div>
-      </nav>
+    </nav>
     <div class="container">
-        <h1>Calorie Calculator</h1>
+        <h1>Never Lose Track Of Your Journey!!!</h1>
         <form action="" method="post">
             <label for="start_point">Start Point:</label>
             <select id="start_point" name="start_point">
-                <option value="Hostel">Hostel</option>
-                <option value="FCI">FCI</option>
-                <option value="FCM">FCM</option>
-                <option value="FOM">FOM</option>
-                <option value="Haji Tapah">Haji Tapah</option>
+                <option value="Hostel" {% if start_point == 'Hostel' %}selected{% endif %}>Hostel</option>
+                <option value="FCI" {% if start_point == 'FCI' %}selected{% endif %}>FCI</option>
+                <option value="FCM" {% if start_point == 'FCM' %}selected{% endif %}>FCM</option>
+                <option value="FOM" {% if start_point == 'FOM' %}selected{% endif %}>FOM</option>
+                <option value="Haji Tapah" {% if start_point == 'Haji Tapah' %}selected{% endif %}>Haji Tapah</option>
             </select>
             <label for="end_point">End Point:</label>
             <select id="end_point" name="end_point">
-                <option value="Hostel">Hostel</option>
-                <option value="FCI">FCI</option>
-                <option value="FCM">FCM</option>
-                <option value="FOM">FOM</option>
-                <option value="Haji Tapah">Haji Tapah</option>
+                <option value="Hostel" {% if end_point == 'Hostel' %}selected{% endif %}>Hostel</option>
+                <option value="FCI" {% if end_point == 'FCI' %}selected{% endif %}>FCI</option>
+                <option value="FCM" {% if end_point == 'FCM' %}selected{% endif %}>FCM</option>
+                <option value="FOM" {% if end_point == 'FOM' %}selected{% endif %}>FOM</option>
+                <option value="Haji Tapah" {% if end_point == 'Haji Tapah' %}selected{% endif %}>Haji Tapah</option>
             </select>
             <button type="submit">Calculate</button>
         </form>

@@ -10,6 +10,7 @@ document.querySelector("form").addEventListener("submit", (e) => {
   const genderElement = document.querySelector('input[name="gender"]:checked');
   const gender = genderElement ? genderElement.value : '';
   const activity = document.getElementById("activity").value;
+ 
 
   if (!weight ||!height ||!age ||!gender ||!activity) {
     alert("Please fill in all fields");
@@ -23,6 +24,9 @@ document.querySelector("form").addEventListener("submit", (e) => {
 
   const calorieNeeds = calculateCalorieNeeds(weight, height, age, gender, activity);
   document.getElementById("calorie-count").innerText = `Your daily calorie needs are: ${calorieNeeds} calories`;
+  
+  
+  window.location.href = "/profile/fgygdjfgygfuywgfwqy";
 });
 
 function calculateCalorieNeeds(weight, height, age, gender, activity) {

@@ -25,6 +25,12 @@ def userauth():
             username = request.form.get('username')
             password1 = request.form.get('password1')
             password2 = request.form.get('password2')
+            height = request.form.get("height")
+            weight = request.form.get('weight')
+            age = request.form.get('age')
+            gender = request.form.get('gender')
+            activity_level = request.form.get('activity_level')
+
         
             ID_exists = User.query.filter_by(student_id=student_id).first()
             username_exist = User.query.filter_by(username=username).first()
@@ -37,7 +43,16 @@ def userauth():
             elif password1 != password2:
                 flash('Password doesnt match', category ='error')
             else:
-                new_user = User(student_id=student_id, username=username, password = generate_password_hash(password1, method='pbkdf2:sha256'))
+                new_user = User(
+                    student_id=student_id, 
+                    username=username, 
+                    password = generate_password_hash(password1, method='pbkdf2:sha256'),
+                    height=height,
+                    weight=weight,
+                    age=age,
+                    gender=gender,
+                    activity_level=activity_level
+                    )
                 db.session.add(new_user)
                 db.session.commit()
                 login_user(new_user, remember=True) 
@@ -65,10 +80,36 @@ def userauth():
 @login_required
 def logout():
     logout_user()
+    flash('You have been logged out')
     return redirect(url_for("views.guest_home"))
 
 @auth.route('/change-password/<int:user_id>', methods=['GET','POST'])
 @login_required
 def change_password(user_id):
     form = PasswordChangeForm()
+<<<<<<< HEAD
     return render_template("changepassword.html", form=form)
+=======
+
+    user = User.query.get(user_id)
+
+    if form.validate_on_submit():
+        current_password = form.current_password.data
+        new_password = form.new_password.data
+        confirm_new_password = form.confirm_new_password.data
+
+        if user.verify_password(current_password):
+            if  new_password == confirm_new_password:
+                user.password = confirm_new_password
+                db.session.commit()
+                flash ('Password Updated')
+                return redirect (f'/profile/{ user.id }')
+            else:
+                flash('New Password do not match')
+        else:
+            flash('Current Password is incorrect')
+    return render_template("changepassword.html", form=form)
+
+
+
+>>>>>>> main
