@@ -5,6 +5,12 @@
         <title></title>
     </head>
 
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/js/cart.js"></script>
+
+
     <h1> My Cart</h1>
 
     <div class="">
@@ -32,15 +38,15 @@
                                     <h3>{{ product.product.product_name }}</h3>
                                     <div class="my-3">
                                         <label for="quantity">Quantity</label>
-                                        <a href="" class="remove item">  </a>
+                                        <a class="minus-cart"> - </a>
                                         <span id="quantity">{{ product.quantity}}</span>
-                                        <a href="" class="plus cart">  </a>
+                                        <a class="plus-cart btn" pid="{{ product.id }}" > + </a>
 
                                     </div>
 
                                     <div class="price product">
-                                        <p class="price view"><span><strong>RM {{ profuct.product.product_price}}</strong></span></p>
-                                        <a href="" class="remove button cart">Remove</a>
+                                        <p class="price view"><span><strong>RM {{ product.product.product_price}}</strong></span></p>
+
 
 
                                     </div>
@@ -67,13 +73,19 @@
                             <li class="list product">
                                 <strong>{{ product.product.product_name}}</strong>
                                 <span id="amount">{{ product.product.product_price}} X 
-                                <span> {{product.product.quantity}}</span></span></li>
+                                <span> {{product.quantity}}</span></span>
+                                <span id="calorie"> ( {{ product.product.product_calorie * product.quantity }} calories ) </span>
+                            </li>
 
                             {% endfor %}
+
+
+                            <li class="total cart"><strong>Amount <span>RM <span>{{ total_price }}</span></span></strong></li>
+                            <li class="total calorie"><strong>Total Calories <span>{{ total_calories }}<span>Calories</span></span></strong></li>
                            
                         </ul>
 
-                        <div class="grid"><a href="#" class="button">Place Order</a></div>
+                        <div class="grid"><a href="/place-order" class="button">Place Order</a></div>
                     </div>
                 </div>
             </div>

@@ -11,36 +11,25 @@
     <title>MMU E-CAL | Step Burner</title>
   </head>
 
+
+ 
+
   <body>
-    <nav>
-        <div class="nav__header">
-            <div class="nav__back">
-             <a href="/home"><i class="ri-arrow-go-back-line"></i></a>
-            </div>
-    </nav>
-<div class="container">
-    <div class="box">
-        <u><h2>ENTER YOUR START/END LOCATION</h2></u>
-        <label class="sp">Starting Point</label>
-        <input list="checkpoint">
-        <datalist id="checkpoint">
-            <option value="Faculty Of Computing Informatics (FCI)"></option>
-            <option value="Faculty Of Creative Multimedia (FCM)"></option>
-            <option value="Faculty Of Management (FOM)"></option>
-            <option value="Faculty Of Engineering (FOE)"></option>
-            <option value="Hostel Building"></option>
-        </datalist>
-        <label class="ep">End Point</label>
-        <input list="checkpoint">
-        <datalist id="checkpoint">
-            <option value="Faculty Of Computing Informatics (FCI)"></option>
-            <option value="Faculty Of Creative Multimedia (FCM)"></option>
-            <option value="Faculty Of Management (FOM)"></option>
-            <option value="Faculty Of Engineering (FOE)"></option>
-            <option value="Hostel Building"></option>
-        </datalist>
-        <button>Calculate</button>
-    </div>
-</div>
+   
+    {% set recent_date = activity_grouped|dictsort|last %}
+{% set activities = activity_grouped[recent_date] %}
+
+<h2> {{ recent_date }}</h2>
+    
+
+      <h3>You have consumed : <strong>{{ total_calories_consumed[recent_date]}} kcal </strong></h3>
+      <h4>To Burn {{ total_calories_consumed[recent_date]}} kcal, you can: </h4>
+
+      {% for activity in activities %}
+        {% endfor %}
+
+
+    
+
   </body>
 </html>

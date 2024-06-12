@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<h1>Order History</h1>
+
+{% for date, orders in order_grouped.items() %}
+<h2>{{ date }}</h2>
+<ul>
+    {% for order in orders %}
+    <li>Item : {{ order.product_name }} ({{order.quantity }}) Price : RM {{ order.price }} Calories : {{ order.calories }}  </li>
+    {% endfor %}
+    <li><strong>Total Prices : RM {{ total_prices[date] }}</strong></h4></li>
+    <li><strong> Calories : {{ total_calories[date] }} kcal</strong></h4></li>
+    </ul>
+    {% endfor %}
+
+  
+    
+
+
