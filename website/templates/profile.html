@@ -15,15 +15,39 @@
    <div class="container">
     <div class="profile-box">
         <a href="/home"><img src="/static/images/profile-menu.png" class="menu-icon"></a>
-        <a href="/change-password"><img src="/static/images/profile-setting.png" class="setting-icon"></a>
+        <a href="/change-password/{{ user.id }}"><img src="/static/images/settings-fill.png" class="setting-icon"></a>
+        <a href="/history"><img class="receipt-icon" src="/static/images/receipt.png"></a>
+        <a href="/activity_log"><img class="history-icon" src="/static/images/history-line.png"></a>
         <img src="/static/images/profile-pic.png" class="profile-pic">
         <h3> {{ user.student_id }} </h3>
         <p> {{ user.username }} </p>
         <div class="profile-buttom">
-            <p>Info</p>
+            <ul>
+              <li>Age : {{ user.age }}</li>
+              <li>Weight : {{ user.weight }} Kg</li>
+              <li>Height : {{ user.height }} cm</li>
+              <li>Gender : {{ user.gender }}</li>
+              <li>Activity Level : {{ user.activity_level }}</li>
+            </ul>
+            <br>
+            <p>To Maintain <strong>{{ user.weight }} Kg</strong>,</p> 
+ 
+            {% set bmr = 0 %}
+            {% if user.gender == 'Male' %}
+                {% set bmr = (10 * user.weight) + (6.25 * user.height) - (5 * user.age) + 5 %}
+            {% else %}
+                {% set bmr = (10 * user.weight) + (6.25 * user.height) - (5 * user.age) - 161 %}
+            {% endif %}
+            {% set activity_multiplier = {'Sedentary': 1.2, 'Lightly Active': 1.375, 'Moderately Active': 1.55, 'Very Active': 1.725} %}
+            {% set activity_factor = activity_multiplier[user.activity_level] %}
+            {% set daily_calories = bmr * activity_factor %}
+
+            <p>You should eat <strong>{{ daily_calories|int }}</strong> calories per day.</p>
+
         </div>
     </div>
    </div>
+
    
 
 

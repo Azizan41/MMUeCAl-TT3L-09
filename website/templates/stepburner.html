@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stepburner.css') }}">
+    <title>MMU E-CAL | STEP BURNER</title>   
+</head>
+<body>
+    <nav>
+        <div class="nav__header">
+            <div class="nav__logo">
+                <a href="#">MMU E-CAL</a>
+            </div>
+            <div class="nav__back" id="menu-back">
+                <a href="/home"><i class="ri-corner-down-left-line"></i></a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Never Lose Track Of Your Journey!!!</h1>
+        <form action="" method="post">
+            <label for="start_point">Start Point:</label>
+            <select id="start_point" name="start_point">
+                <option value="Hostel Building" {% if start_point == 'Hostel' %}selected{% endif %}>Hostel Building</option>
+                <option value="Faculty Of Computing Informatics" {% if start_point == 'Faculty Of Computing Informatics' %}selected{% endif %}>Faculty Of Computing Informatics</option>
+                <option value="Faculty of Creative Multimedia" {% if start_point == 'Faculty of Creative Multimedia' %}selected{% endif %}>Faculty of Creative Multimedia</option>
+                <option value="Faculty Of Management" {% if start_point == 'Faculty Of Management' %}selected{% endif %}>Faculty Of Management</option>
+                <option value="Haji Tapah Cafe" {% if start_point == 'Haji Tapah Cafe' %}selected{% endif %}>Haji Tapah Cafe</option>
+                <option value="Starbees" {% if start_point == 'Starbees' %}selected{% endif %}>Starbees</option>
+                <option value="Dewan Tun Canselor" {% if start_point == 'Dewan Tun Canselor' %}selected{% endif %}>Dewan Tun Canselor</option>
+                <option value="Deen Cafe" {% if start_point == 'Deen Cafe' %}selected{% endif %}>Deen Cafe</option>
+                <option value="Surau Al-Hidayah" {% if start_point == 'Surau Al-Hidayah' %}selected{% endif %}>Surau Al-Hidayah</option>
+            </select>
+            <label for="end_point">End Point:</label>
+            <select id="end_point" name="end_point">
+                <option value="Hostel Building" {% if end_point == 'Hostel' %}selected{% endif %}>Hostel Building</option>
+                <option value="Faculty Of Computing Informatics" {% if end_point == 'Faculty Of Computing Informatics' %}selected{% endif %}>Faculty Of Computing Informatics</option>
+                <option value="Faculty of Creative Multimedia" {% if end_point == 'Faculty of Creative Multimedia' %}selected{% endif %}>Faculty of Creative Multimedia</option>
+                <option value="Faculty Of Management" {% if end_point == 'Faculty Of Management' %}selected{% endif %}>Faculty Of Management</option>
+                <option value="Haji Tapah Cafe" {% if end_point == 'Haji Tapah Cafe' %}selected{% endif %}>Haji Tapah Cafe</option>
+                <option value="Starbees" {% if start_point == 'Starbees' %}selected{% endif %}>Starbees</option>
+                <option value="Dewan Tun Canselor" {% if start_point == 'Dewan Tun Canselor' %}selected{% endif %}>Dewan Tun Canselor</option>
+                <option value="Deen Cafe" {% if start_point == 'Deen Cafe' %}selected{% endif %}>Deen Cafe</option>
+                <option value="Surau Al-Hidayah" {% if start_point == 'Surau Al-Hidayah' %}selected{% endif %}>Surau Al-Hidayah</option>
+            </select>
+            <button type="submit">Calculate</button>
+        </form>
+        {% if calories and steps %}
+            <p>Calories burned: {{ calories }} kcal</p>
+            <p>Steps gained: {{ steps }} steps</p>
+        {% elif error %}
+            <p>{{ error }}</p>
+        {% endif %} 
+
+        {% if id %}
+            <a class="record-button"  href="/stepcounter/{{ id }}"><button>Record</button></a>
+        {% endif %}
+    </div>
+</body>
+</html>
