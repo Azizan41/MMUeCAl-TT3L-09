@@ -48,6 +48,25 @@
     top: 40px;
 }
 
+.receipt-icon{
+
+    position: absolute;
+    text-align: center;
+    bottom: 40px;
+    left: 40px;
+  
+}
+
+.history-icon{
+
+    position: absolute;
+    text-align: center;
+    bottom: 40px;
+    right: 40px;
+  
+}
+
+
 .profile-pic{
     width: 150px;
     border-radius: 50%;

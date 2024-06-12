@@ -31,6 +31,7 @@ def add_product():
             product_name = form.product_name.data
             product_price = form.product_price.data
             in_stock = form.in_stock.data
+            product_calorie = form.product_calorie.data
             
             file = form.product_picture.data
 
@@ -43,8 +44,8 @@ def add_product():
             new_item = Product()
             new_item.product_name = product_name
             new_item.product_price = product_price
-            new_item.product_name = product_name
             new_item.in_stock = in_stock
+            new_item.product_calorie = product_calorie
 
             new_item.product_picture = file_path
 

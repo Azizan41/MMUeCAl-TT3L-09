@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/static/style_profile.css">
+</head>
+<body>
+
+
+      
+    
+
+   <div class="container">
+    <div class="profile-box">
+        <a href="/home"><img src="/static/images/profile-menu.png" class="menu-icon"></a>
+        <a href="/change-password/{{ user.id }}"><img src="/static/images/settings-fill.png" class="setting-icon"></a>
+        <a href="/history"><img class="receipt-icon" src="/static/images/receipt.png"></a>
+        <a href="/activity_log"><img class="history-icon" src="/static/images/history-line.png"></a>
+        <img src="/static/images/profile-pic.png" class="profile-pic">
+        <h3> {{ user.student_id }} </h3>
+        <p> {{ user.username }} </p>

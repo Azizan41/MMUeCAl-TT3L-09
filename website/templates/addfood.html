@@ -3,11 +3,12 @@
 <table class="addfoodtable">
     <thead>
         <tr>
-            <th scope="'col">Product Name</th>
-            <th scope="'col">Price</th>
-            <th scope="'col">In Stock</th>
-            <th scope="'col">Picture</th>
-            <th scope="'col">Add</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">In Stock</th>
+            <th scope="col">Picture</th>
+            <th scope="col">Calorie</th>
+            <th scope="col">Add</th>
         </tr>
     </thead>
 
@@ -20,6 +21,7 @@
                 <td>{{ form.product_price }}</td>
                 <td>{{ form.in_stock }}</td>
                 <td>{{ form.product_picture }}</td>
+                <td>{{ form.product_calorie }}</td>
                 <td>{{ form.add_product }}</td>
             </form>
         </tr>
