@@ -15,93 +15,42 @@
    <div class="container">
     <div class="profile-box">
         <a href="/home"><img src="/static/images/profile-menu.png" class="menu-icon"></a>
-        <a href="/change-password"><img src="/static/images/profile-setting.png" class="setting-icon"></a>
+        <a href="/change-password/{{ user.id }}"><img src="/static/images/settings-fill.png" class="setting-icon"></a>
+        <a href="/history"><img class="receipt-icon" src="/static/images/receipt.png"></a>
+        <a href="/activity_log"><img class="history-icon" src="/static/images/history-line.png"></a>
         <img src="/static/images/profile-pic.png" class="profile-pic">
         <h3> {{ user.student_id }} </h3>
         <p> {{ user.username }} </p>
         <div class="profile-buttom">
-          <p>Info</p>
-        </div>
-        <div class="calorie-counter">
-          <h4>Calorie Counter</h4>
-          <p><span id="calorie-count"></span></p>
-        </div>
-        <form class="mini">
-          <h4>Calculate Your Daily Calorie Needs</h4>
-          <label for="weight">Please enter your weight (kg):</label>
-          <input type="number" id="weight" name="weight"><br>
-          <label for="height">Please enter your height (cm):</label>
-          <input type="number" id="height" name="height"><br>
-          <label for="age">Please enter your age:</label>
-          <input type="number" id="age" name="age"><br>
-          Gender:
-          <input type="radio" name="gender" value="female">Female
-          <input type="radio" name="gender" value="male">Male
-          <br>
-          <label for="activity">Choose your activity level:</label>
-          <input list="activities" name="activity" id="activity">
-          <datalist id="activities">
-            <option value="sedentary">
-            <option value="lightly active">
-            <option value="moderately active">
-            <option value="very active">
-          </datalist>
-          <br>
-          <input type="submit" value="Calculate">
-        </form>
+            <ul>
+              <li>Age : {{ user.age }}</li>
+              <li>Weight : {{ user.weight }} Kg</li>
+              <li>Height : {{ user.height }} cm</li>
+              <li>Gender : {{ user.gender }}</li>
+              <li>Activity Level : {{ user.activity_level }}</li>
+            </ul>
+            <br>
+            <p>To Maintain <strong>{{ user.weight }} Kg</strong>,</p> 
+ 
+            {% set bmr = 0 %}
+            {% if user.gender == 'Male' %}
+                {% set bmr = (10 * user.weight) + (6.25 * user.height) - (5 * user.age) + 5 %}
+            {% else %}
+                {% set bmr = (10 * user.weight) + (6.25 * user.height) - (5 * user.age) - 161 %}
+            {% endif %}
+            {% set activity_multiplier = {'Sedentary': 1.2, 'Lightly Active': 1.375, 'Moderately Active': 1.55, 'Very Active': 1.725} %}
+            {% set activity_factor = activity_multiplier[user.activity_level] %}
+            {% set daily_calories = bmr * activity_factor %}
 
-        <script src="/static/script_profile.js"></script>
-      
+            <p>You should eat <strong>{{ daily_calories|int }}</strong> calories per day.</p>
+
+        </div>
     </div>
-    <!-- <div class="profile-box">
-        <a href="/home"><img src="/static/images/profile-menu.png" class="menu-icon"></a>
-        <a href="/change-password"><img src="/static/images/profile-setting.png" class="setting-icon"></a>
-        <img src="/static/images/profile-pic.png" class="profile-pic">
-        <h3> {{ user.student_id }} </h3>
-        <p> {{ user.username }} </p>
-        <div class="profile-buttom">
-            <p>Info</p>
-        </div>
-
-
-        <div class="calorie-counter">
-            <h4>Calorie Counter</h4>
-            <p>Current Calorie Intake: <span id="calorie-count">0</span></p>
-            <button id="add-calorie-btn">Add Calorie</button>
-            <button id="subtract-calorie-btn">Subtract Calorie</button>
-        </div>
-    
-
-        <form>
-            <h4>Calculate Your Daily Calorie Needs</h4>
-            <label for="weight">Please enter your weight (kg):</label>
-            <input type="number" id="weight" name="weight"><br>
-            <label for="height">Please enter your height (cm):</label>
-            <input type="number" id="height" name="height"><br>
-            <label for="age">Please enter your age:</label>
-            <input type="number" id="age" name="age"><br>
-            Gender:
-            <input type="radio" name="gender" value="female">Female
-            <input type="radio" name="gender" value="male">Male
-            <br>
-            <label for="activity">Choose your activity level:</label>
-            <input list="activities" name="activity" id="activity">
-            <datalist id="activities">
-                <option value="sedentary">
-                <option value="lightly active">
-                <option value="moderately active">
-                <option value="very active">
-            </datalist>
-            <br>
-            <input type="submit" value="Calculate">
-        </form>
-
-
-
-    </div> -->
    </div>
 
-</body>
+   
+
+
 
 
 </html>

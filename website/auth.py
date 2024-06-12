@@ -72,6 +72,3 @@ def logout():
 def change_password(user_id):
     form = PasswordChangeForm()
     return render_template("changepassword.html", form=form)
-
-
-

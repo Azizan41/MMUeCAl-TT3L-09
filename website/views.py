@@ -37,11 +37,6 @@ def calorie_counter():
 def step_counter():
     return render_template("stepcounter.html")
 
-@views.route('/exercise')
-@login_required
-def exercise():
-    return render_template("exercise.html")
-
 @views.route('/cart/<string:product_name>')
 @login_required
 def cart(product_name):
@@ -84,10 +79,3 @@ def show_cart():
         amount += product.product.product_price * product.quantity
 
     return render_template('cart.html', cart=cart, amount=amount, total=amount)
-
-
-
-
-
-
-

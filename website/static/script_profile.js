@@ -1,14 +1,5 @@
 let calorieCount = 0;
       
-// document.getElementById("add-calorie-btn").addEventListener("click", () => {
-//   calorieCount += 100; // adjust the calorie increment value as needed
-//   document.getElementById("calorie-count").innerText = calorieCount;
-// });
-
-// document.getElementById("subtract-calorie-btn").addEventListener("click", () => {
-//   calorieCount -= 100; // adjust the calorie decrement value as needed
-//   document.getElementById("calorie-count").innerText = calorieCount;
-// });
 
 document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault();
@@ -16,7 +7,8 @@ document.querySelector("form").addEventListener("submit", (e) => {
   const weight = parseFloat(document.getElementById("weight").value);
   const height = parseFloat(document.getElementById("height").value);
   const age = parseInt(document.getElementById("age").value);
-  const gender = document.querySelector('input[name="gender"]:checked').value;
+  const genderElement = document.querySelector('input[name="gender"]:checked');
+  const gender = genderElement ? genderElement.value : '';
   const activity = document.getElementById("activity").value;
 
   if (!weight ||!height ||!age ||!gender ||!activity) {
