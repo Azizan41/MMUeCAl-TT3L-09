@@ -344,6 +344,9 @@ def activity_log():
 
 
 
+<<<<<<< HEAD
+    return render_template('cart.html', cart=cart, amount=amount, total=amount)
+=======
 
 
 
@@ -351,3 +354,4 @@ def activity_log():
 
 
 
+>>>>>>> main
