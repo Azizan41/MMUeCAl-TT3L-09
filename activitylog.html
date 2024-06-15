@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='activitylog.css') }}">
+    <title>MMU E-CAL | ACTIVITY LOG</title>   
+</head>
+<body>
+    <nav>
+        <div class="nav__header">
+            <div class="nav__logo">
+                <a href="#">MMU E-CAL</a>
+            </div>
+            <div class="nav__back" id="menu-back">
+                <a href="/profile"><i class="ri-corner-down-left-line"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="title">
+        <h1>ACTIVITY LOG</h1>
+    </div>
+
+    <div class="container">
+        {% for date, activities in activity_grouped.items() %}
+            <div class="day-box">
+                <h2>{{ date }}</h2>
+                <div class="activity-details">
+                    {% for activity in activities %}
+                    {% endfor %}
+                    <div class="activity-item"><strong>Total Calories burned: {{ total_calories_burned[date]}} kcal</strong></div>
+                    <div class="activity-item"><strong>Total Calories consumed: {{ total_calories_consumed[date]}} kcal</strong></div>
+    
+                    {% set available_calories = total_calories_consumed[date] - total_calories_burned[date] %}
+                    {% if available_calories < 0 %}
+                        <div class="activity-item"><h3><strong>Available Calories: 0 kcal</strong></h3></div>
+                        <div class="activity-item"><h3><strong>You Have Burned Extra {{available_calories * -1}}</strong></h3></div>
+                    {% else %}
+                        <div class="activity-item"><h3><strong>You Still Have: {{ available_calories }} kcal</strong></h3></div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>

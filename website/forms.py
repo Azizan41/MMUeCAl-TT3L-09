@@ -22,6 +22,7 @@ class PasswordChangeForm(FlaskForm):
     confirm_new_password = PasswordField('New Password', validators=[DataRequired(), length(min=6)])
     change_password = SubmitField('Change Password')
 
+
 class UpdateProfile(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     age = IntegerField('Age', validators=[DataRequired(), NumberRange(min=0)])
@@ -41,3 +42,4 @@ class UpdateProfile(FlaskForm):
         
     
     
+
