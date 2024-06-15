@@ -4,11 +4,8 @@ from sqlalchemy import func
 from datetime import datetime
 from werkzeug.security import check_password_hash
 
-class Weight(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.Float)
-    data = db.Column(db.DateTime(timezone=True), default=func.now())
 
+# Models to relate database to the function
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

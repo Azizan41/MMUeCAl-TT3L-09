@@ -29,7 +29,7 @@ def create_app():
     app.register_blueprint(admin, url_prefix = '/')
     
 
-    from .models import User, Weight
+    from .models import User
 
     with app.app_context():
         db.create_all()

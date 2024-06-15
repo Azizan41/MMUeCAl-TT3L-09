@@ -1,7 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, FloatField, PasswordField, BooleanField, SubmitField, SelectField
-from wtforms.validators import DataRequired, length, NumberRange, AnyOf, ValidationError
+from wtforms.validators import DataRequired, length, NumberRange
 from flask_wtf.file import FileField, FileRequired
+
+
+# Forms using flaskforms, not all forms used flaskform
 
 class ShopItemsForm(FlaskForm):
     product_name = StringField('Name of Product', validators=[DataRequired()])

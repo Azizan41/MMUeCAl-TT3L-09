@@ -23,11 +23,14 @@ conn.close()
 @views.route('/')
 def guest_home():
     return render_template("guest_home.html")
-
+                                                   
 @views.route('/home')
 @login_required
 def home():
     return render_template("home.html")
+
+#   This is where the food is being called from the database dislayed in the html  #
+
 
 @views.route('/foodorder')
 @login_required
@@ -35,6 +38,9 @@ def foodorder():
     foods = Product.query.order_by(Product.date_added).all()
     return render_template("foodorder.html", foods=foods, cart=Cart.query.filter_by(customer_link=current_user.id).all()
                            if current_user.is_authenticated else [])
+
+
+#   Groupings of steps data from user data  #
 
 @views.route('/profile')
 @login_required
@@ -61,6 +67,9 @@ def profile():
                            user=user, 
                            steps_grouped=steps_grouped,
                            total_steps_accumulated=total_steps_accumulated)
+
+
+# Function to update profile info for each user
 
 @views.route('/update-profile/<int:user_id>', methods={'GET', 'POST'})
 @login_required
@@ -102,10 +111,13 @@ def update_profile(user_id):
 
 
 
+# check if the request method is post
+# get start point and end point from the submitted form data
+
 @views.route('/stepcounter', methods=['GET', 'POST'])
 @login_required
 def step_counter():
-
+# fetch the first result of the query
     db_path = 'instance/users_info.db'
 
     if request.method == 'POST':
@@ -115,6 +127,7 @@ def step_counter():
         c = conn.cursor()
         c.execute("SELECT id, calories, steps FROM routes WHERE start_point=? AND end_point=?", (start_point, end_point))
         result = c.fetchone()
+        #if the request method is GET, simply render the stepburner template
         conn.close()
         if result:
             id = result[0]
@@ -125,6 +138,8 @@ def step_counter():
         else:
             return render_template('stepburner.html', error="Route not found", start_point=start_point, end_point=end_point)
     return render_template('stepburner.html')
+
+
 
 
 @views.route('/stepcounter/<int:routes_id>')
@@ -155,6 +170,9 @@ def record_step_counter(routes_id):
         flash('Route not found')
         return redirect(request.referrer)
 
+
+
+# Add item to cart function
 
 @views.route('/cart/<int:product_id>')
 @login_required
@@ -191,6 +209,9 @@ def cart(product_id):
     return redirect(request.referrer)
 
 
+# Function to remove item from cart
+
+
 @views.route('/remove-cart-product/<int:product_id>')
 @login_required
 def remove_cart_product(product_id):
@@ -214,7 +235,7 @@ def remove_cart_product(product_id):
     return redirect(request.referrer)
      
 
-
+# Function to calculate cart items and total up everything for per cart
 
 @views.route('/cart')
 @login_required
@@ -230,6 +251,8 @@ def show_cart():
     return render_template('cart.html', cart=cart_items, total_calories=total_calories,  total_price=total_price)
 
     
+
+# Function to place order and empty the cart after order
 
 @views.route('/place-order')
 @login_required
@@ -267,7 +290,7 @@ def place_order():
 
 
             flash('Order Placed Successfully')
-            return ('Order Placed')
+            return render_template('cart.html')
         
         except Exception as e:
             print(e)
@@ -278,6 +301,10 @@ def place_order():
         flash('Your cart is empty')
         return redirect('/')
     
+
+
+# Function to display order history grouped by date 
+
 
 @views.route('/history')
 @login_required
@@ -296,6 +323,10 @@ def history():
 
 
     return render_template('order_history.html', order_grouped=order_grouped, total_prices=total_prices, total_calories=total_calories )
+
+
+# Function to view calorie burned after walking from place to place after record
+
 
 @views.route('/activity_log')
 @login_required
