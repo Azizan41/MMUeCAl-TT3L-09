@@ -1,7 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, FloatField, PasswordField, BooleanField, SubmitField, SelectField
-from wtforms.validators import DataRequired, length, NumberRange, AnyOf, ValidationError
+from wtforms.validators import DataRequired, length, NumberRange
 from flask_wtf.file import FileField, FileRequired
+
+
+# Forms using flaskforms, not all forms used flaskform
 
 class ShopItemsForm(FlaskForm):
     product_name = StringField('Name of Product', validators=[DataRequired()])
@@ -21,14 +24,17 @@ class PasswordChangeForm(FlaskForm):
 
 
 class UpdateProfile(FlaskForm):
-    student_id = StringField('SID', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     age = IntegerField('Age', validators=[DataRequired(), NumberRange(min=0)])
     height = IntegerField('Height', validators=[DataRequired(), NumberRange(min=0)])
     weight = IntegerField('Weight', validators=[DataRequired(), NumberRange(min=0)])
-    gender = SelectField('Gender', choices=[('male', 'Male'), ('female', 'Female'), ('other', 'Other')], validators=[DataRequired()])
-    activity_level = SelectField('Activity Level', choices=[('sedentary', 'Sedentary'), ('moderate', 'Moderate'), ('active', 'Active')], validators=[DataRequired()])
-
+    gender = SelectField('Gender', choices=[('Male', 'Male'), ('Female', 'Female'),], validators=[DataRequired()])
+    activity_level = SelectField('Activity Level', choices=[
+        ('Sedentary', 'Sedentary'),
+        ('Lightly Active', 'Lightly Active'),
+        ('Moderately Active', 'Moderately Active'),
+        ('Very Active', 'Very Active')
+    ], validators=[DataRequired()])
     update_profile = SubmitField('Update')
    
 

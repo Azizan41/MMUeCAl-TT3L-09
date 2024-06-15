@@ -1,104 +1,61 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
-
-
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/static/js/cart.js"></script>
-
-
-    <h1> My Cart</h1>
-
-    <div class="">
-        <div class="">
-
-
-            {% if cart %}
-
-
-            <h1> MY CART </h1>
-            <div class="colum">
-                <div class="card">
-                    <div class="card inside">
-
-                        {% for product in cart %}
-
-                        <div class="row">
-                            <div class="col inside">
-
-                               <img src="{{ product.product.product_picture }}" alt="" class="image view boostrap">  
-
-                            </div>
-                            <div class="colum 2">
-                                <div>
-                                    <h3>{{ product.product.product_name }}</h3>
-                                    <div class="my-3">
-                                        <label for="quantity">Quantity</label>
-                                        <a class="minus-cart"> - </a>
-                                        <span id="quantity">{{ product.quantity}}</span>
-                                        <a class="plus-cart btn" pid="{{ product.id }}" > + </a>
-
-                                    </div>
-
-                                    <div class="price product">
-                                        <p class="price view"><span><strong>RM {{ product.product.product_price}}</strong></span></p>
-
-
-
-                                    </div>
+<head>
+    <meta charset="utf-8">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/cart.css">
+</head>
+<body>
+    {% if cart %}
+    <div class="container cart-container">
+        <a href="/foodorder" class="btn btn-secondary mt-3 ml-3"><img src="/static/images/arrow-go-back-fill.png"></a>
+        <h1 class="text-center mb-5">Shopping Cart</h1>
+        <div class="row">
+            <div class="col-md-8">
+                {% for product in cart %}
+                <div class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="{{ product.product.product_picture }}" class="card-img" alt="Product Image">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ product.product.product_name }}</h3>
+                                <p class="card-text">Price      :<strong> RM {{ product.product.product_price }}</strong></p>
+                                <p class="card-text">Calories   :<strong> {{ product.product.product_calorie }} kcal </strong></p>
+                                <div class="quantity">
+                                    <a href="/remove-cart-product/{{ product.product.id }}" class="btn btn-sm btn-primary increase-quantity" type="button">-</a>
+                                    <span class="quantity-value">{{ product.quantity }}</span>
+                                    <a href="/cart/{{ product.product.id }}" class="btn btn-sm btn-primary increase-quantity" type="button">+</a>
                                 </div>
                             </div>
                         </div>
-
-                        <hr>
-
-                        {% endfor %}
-
                     </div>
                 </div>
+                {% endfor %}
             </div>
-
-            <div class="col-final-view">
+            <div class="col-md-4">
                 <div class="card">
-                    <div class="card inside">
-                        <h3>Cart Summary</h3>
-                        <hr color="black">
-                        <ul class="listing">
-                            {% for product in cart %}
-
-                            <li class="list product">
-                                <strong>{{ product.product.product_name}}</strong>
-                                <span id="amount">{{ product.product.product_price}} X 
-                                <span> {{product.quantity}}</span></span>
-                                <span id="calorie"> ( {{ product.product.product_calorie * product.quantity }} calories ) </span>
+                    <div class="card-body">
+                        <h5 class="card-title">Cart Summary</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Total Calories : <strong>{{ total_calories }} kcal </strong> 
                             </li>
-
-                            {% endfor %}
-
-
-                            <li class="total cart"><strong>Amount <span>RM <span>{{ total_price }}</span></span></strong></li>
-                            <li class="total calorie"><strong>Total Calories <span>{{ total_calories }}<span>Calories</span></span></strong></li>
-                           
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Total Price    : <strong> RM {{ total_price }} </strong>
                         </ul>
-
-                        <div class="grid"><a href="/place-order" class="button">Place Order</a></div>
+                        <a href="/place-order" class="btn btn-primary btn-block mt-3">Proceed to Checkout</a>
                     </div>
                 </div>
             </div>
-
-
-            {% else %}
-
-            <h1> Your Cart is Empty</h1>
-
-            {% endif %}
-
         </div>
     </div>
-    <body>
-     
+    {% else %}
+    <h1 class="text-center mb-5">Your Cart is Empty</h1>
+    <a href="/foodorder" class="btn btn-secondary mt-3 ml-3"><img src="/static/images/arrow-go-back-fill.png"></a>
+    {% endif %}
+</body>
 </html>
+

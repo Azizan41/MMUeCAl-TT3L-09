@@ -7,6 +7,8 @@ from . import db
 
 admin = Blueprint('admin', __name__)
 
+# Function to list out all the product
+
 @admin.route('/list_product')
 def list_food():
     if current_user.admin == True:
@@ -14,13 +16,13 @@ def list_food():
         return render_template('listfood.html', foods=foods)
     return render_template('404.html')
 
-
+# route to view image 
 
 @admin.route('/website/static/foods/<path:filename>')
 def get_image(filename):
     return send_from_directory('../website/static/foods/',filename)
 
-
+# function to add product 
 
 @admin.route('/add_product', methods=['GET', 'POST'])
 @login_required
@@ -62,6 +64,11 @@ def add_product():
         return render_template('addfood.html', form=form)
     return render_template('404.html')
 
+
+
+
+# Function to update product from the website not the database directly 
+
 @admin.route('/update-product/<int:product_id>', methods={'GET', 'POST'})
 @login_required
 def update_product(product_id):
@@ -101,6 +108,8 @@ def update_product(product_id):
 
         return render_template('updatefood.html', form=form)
     return render_template('404.html')
+
+# Function to remove product from the database by website
 
 @admin.route('/remove-product/<int:product_id>', methods=['GET', 'POST'])
 @login_required

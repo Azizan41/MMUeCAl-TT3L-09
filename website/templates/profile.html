@@ -15,23 +15,28 @@
    <div class="container">
     <div class="profile-box">
         <a href="/home"><img src="/static/images/profile-menu.png" class="menu-icon"></a>
-        <a href="/change-password/{{ user.id }}"><img src="/static/images/settings-fill.png" class="setting-icon"></a>
+        <a href="/update-profile/{{ user.id }}"><img src="/static/images/settings-fill.png" class="setting-icon"></a>
         <a href="/history"><img class="receipt-icon" src="/static/images/receipt.png"></a>
         <a href="/activity_log"><img class="history-icon" src="/static/images/history-line.png"></a>
         <img src="/static/images/profile-pic.png" class="profile-pic">
         <h3> {{ user.student_id }} </h3>
-        <p> {{ user.username }} </p>
+        <h3> {{ user.username }} </h3>
         <div class="profile-buttom">
-            <ul>
-              <li>Age : {{ user.age }}</li>
-              <li>Weight : {{ user.weight }} Kg</li>
-              <li>Height : {{ user.height }} cm</li>
-              <li>Gender : {{ user.gender }}</li>
-              <li>Activity Level : {{ user.activity_level }}</li>
-            </ul>
-            <br>
-            <p>To Maintain <strong>{{ user.weight }} Kg</strong>,</p> 
- 
+              <p>Age : <strong> {{ user.age }} </strong></p>
+              <p>Weight : <strong>{{ user.weight }} Kg </strong></p>
+              <p>Height : <strong>{{ user.height }} cm </strong></p>
+              <p>Gender : <strong> {{ user.gender }} </strong></p>
+              <p>Activity Level : <strong> {{ user.activity_level }} </strong> </p>
+
+              <br>
+              {% for total_steps in total_steps_accumulated.values() %}
+               <p>You're At <strong>{{ total_steps }} </strong> / 10000 steps</p>
+              {% endfor %}
+
+        
+              <br>
+              <p>To Maintain <strong>{{ user.weight }} Kg</strong>,</p> 
+   
             {% set bmr = 0 %}
             {% if user.gender == 'Male' %}
                 {% set bmr = (10 * user.weight) + (6.25 * user.height) - (5 * user.age) + 5 %}

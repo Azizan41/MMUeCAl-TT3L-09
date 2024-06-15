@@ -4,11 +4,8 @@ from sqlalchemy import func
 from datetime import datetime
 from werkzeug.security import check_password_hash
 
-class Weight(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.Float)
-    data = db.Column(db.DateTime(timezone=True), default=func.now())
 
+# Models to relate database to the function
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -92,7 +89,7 @@ class Activity(db.Model):
     __tablename__ = 'activity'
     id = db.Column(db.Integer, primary_key=True)
     calorie_burned = db.Column(db.Float)
-    calorie_consumed = db.Column(db.Float)
+    steps = db.Column(db.Integer)
     date_added = db.Column(db.DateTime(timezone=True), default=func.now())
 
     routes_id = db.Column(db.Integer, db.ForeignKey('routes.id'))
