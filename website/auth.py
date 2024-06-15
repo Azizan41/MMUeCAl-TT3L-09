@@ -87,9 +87,7 @@ def logout():
 @login_required
 def change_password(user_id):
     form = PasswordChangeForm()
-<<<<<<< HEAD
-    return render_template("changepassword.html", form=form)
-=======
+
 
     user = User.query.get(user_id)
 
@@ -112,4 +110,4 @@ def change_password(user_id):
 
 
 
->>>>>>> main
+
