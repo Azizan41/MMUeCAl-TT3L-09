@@ -88,6 +88,7 @@ def logout():
 def change_password(user_id):
     form = PasswordChangeForm()
 
+
     user = User.query.get(user_id)
 
     if form.validate_on_submit():
@@ -106,6 +107,7 @@ def change_password(user_id):
         else:
             flash('Current Password is incorrect')
     return render_template("changepassword.html", form=form)
+
 
 
 
