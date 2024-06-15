@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from . import db
-from .models import User
+from .models import User, Activity
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .forms import PasswordChangeForm
@@ -87,25 +87,35 @@ def logout():
 @login_required
 def change_password(user_id):
     form = PasswordChangeForm()
-
     user = User.query.get(user_id)
 
-    if form.validate_on_submit():
-        current_password = form.current_password.data
-        new_password = form.new_password.data
-        confirm_new_password = form.confirm_new_password.data
 
-        if user.verify_password(current_password):
-            if  new_password == confirm_new_password:
-                user.password = confirm_new_password
-                db.session.commit()
-                flash ('Password Updated')
-                return redirect (f'/profile/{ user.id }')
+    
+    if current_user.id == user_id:
+        if form.validate_on_submit():
+            current_password = form.current_password.data
+            new_password = form.new_password.data
+            confirm_new_password = form.confirm_new_password.data
+
+            if check_password_hash(user.password, current_password):
+                if new_password == confirm_new_password:
+                    try:
+                        hashed_password = generate_password_hash(new_password)
+                        user.password = hashed_password
+                        db.session.commit()
+
+                        flash('Password updated successfully', 'success')
+                        return redirect(url_for('views.profile'))
+                    except Exception as e:
+                        print('Error updating password:', e)
+                        flash('Error updating password. Please try again later.', 'error')
+                else:
+                    flash('New password and confirm password do not match', 'error')
             else:
-                flash('New Password do not match')
-        else:
-            flash('Current Password is incorrect')
-    return render_template("changepassword.html", form=form)
+                flash('Current password is incorrect', 'error')
+
+        return render_template("changepassword.html", form=form, user=user)
+    return render_template('changepassword.html', form=form, user=user)
 
 
 

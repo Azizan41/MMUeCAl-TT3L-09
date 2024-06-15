@@ -92,7 +92,7 @@ class Activity(db.Model):
     __tablename__ = 'activity'
     id = db.Column(db.Integer, primary_key=True)
     calorie_burned = db.Column(db.Float)
-    calorie_consumed = db.Column(db.Float)
+    steps = db.Column(db.Integer)
     date_added = db.Column(db.DateTime(timezone=True), default=func.now())
 
     routes_id = db.Column(db.Integer, db.ForeignKey('routes.id'))

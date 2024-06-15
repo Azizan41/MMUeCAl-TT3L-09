@@ -20,14 +20,17 @@ class PasswordChangeForm(FlaskForm):
     change_password = SubmitField('Change Password')
 
 class UpdateProfile(FlaskForm):
-    student_id = StringField('SID', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     age = IntegerField('Age', validators=[DataRequired(), NumberRange(min=0)])
     height = IntegerField('Height', validators=[DataRequired(), NumberRange(min=0)])
     weight = IntegerField('Weight', validators=[DataRequired(), NumberRange(min=0)])
-    gender = SelectField('Gender', choices=[('male', 'Male'), ('female', 'Female'), ('other', 'Other')], validators=[DataRequired()])
-    activity_level = SelectField('Activity Level', choices=[('sedentary', 'Sedentary'), ('moderate', 'Moderate'), ('active', 'Active')], validators=[DataRequired()])
-
+    gender = SelectField('Gender', choices=[('Male', 'Male'), ('Female', 'Female'),], validators=[DataRequired()])
+    activity_level = SelectField('Activity Level', choices=[
+        ('Sedentary', 'Sedentary'),
+        ('Lightly Active', 'Lightly Active'),
+        ('Moderately Active', 'Moderately Active'),
+        ('Very Active', 'Very Active')
+    ], validators=[DataRequired()])
     update_profile = SubmitField('Update')
    
 

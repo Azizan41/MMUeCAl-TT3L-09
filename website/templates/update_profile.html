@@ -14,10 +14,24 @@
 
    <div class="container">
     <div class="profile-box">
-        <a href="/home"><img src="/static/images/profile-menu.png" class="menu-icon"></a>
-        <a href="/change-password/{{ user.id }}"><img src="/static/images/settings-fill.png" class="setting-icon"></a>
-        <a href="/history"><img class="receipt-icon" src="/static/images/receipt.png"></a>
-        <a href="/activity_log"><img class="history-icon" src="/static/images/history-line.png"></a>
+        <a href="/profile"><img src="/static/images/profile-menu.png" class="menu-icon"></a>
+        <a href="/change-password/{{ user.id }}"><img src="/static/images/key-fill.png" class="setting-icon"></a>
         <img src="/static/images/profile-pic.png" class="profile-pic">
         <h3> {{ user.student_id }} </h3>
         <p> {{ user.username }} </p>
+
+            <form action="" method="POST" enctype="multipart/form-data">
+                   {{ form.hidden_tag() }}
+                   <tr>
+                           <td>{{ form.username }}</td>
+                           <td>{{ form.age }}</td>
+                           <td>{{ form.height }}</td>
+                           <td>{{ form.weight }}</td>
+                           <td>{{ form.gender }}</td>
+                           <td>{{ form.activity_level }}</td>
+                           <td>{{ form.update_profile }}</td>
+
+                    </tr>
+            </form>
+                
+       

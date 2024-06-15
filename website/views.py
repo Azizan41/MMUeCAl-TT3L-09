@@ -40,17 +40,35 @@ def foodorder():
 @login_required
 def profile():
     user = User.query.filter_by(id=current_user.id).first()
-    return render_template('profile.html', user=user)
+
+    steps_log = Activity.query.filter_by(customer_link = current_user.id).order_by(desc(Activity.date_added)).all()
+
+    steps_grouped = defaultdict(list)
+    total_steps_accumulated = defaultdict(int)
+
+    for steps in steps_log:
+        year = steps.date_added.year
+        month = steps.date_added.month
+        day = steps.date_added.day
+
+        date_obj = datetime(year, month, day)
+        date_format = date_obj.strftime("%Y/%m/%d")
+
+        steps_grouped[date_format].append(steps)
+        total_steps_accumulated[date_format] += steps.steps
+
+    return render_template('profile.html', 
+                           user=user, 
+                           steps_grouped=steps_grouped,
+                           total_steps_accumulated=total_steps_accumulated)
 
 @views.route('/update-profile/<int:user_id>', methods={'GET', 'POST'})
 @login_required
 def update_profile(user_id):
-     user = User.query.get(user_id)
-     user_to_update = User.query.get(user_id)
+    user = User.query.get(user_id)
      
-     if current_user.id == user_id:
-        form = UpdateProfile(obj=user_to_update)
-        form.student_id.render_kw ={'placeholder': user.id}
+    if current_user.id == user_id:
+        form = UpdateProfile()
         form.username.render_kw ={'placeholder': user.username}
         form.age.render_kw ={'placeholder': user.age}
         form.height.render_kw ={'placeholder': user.height}
@@ -78,49 +96,11 @@ def update_profile(user_id):
              return redirect (url_for('views.profile'))
          except Exception as e:
              print('Profile Not Updated', e)
-        return render_template('profile.html', form=form, user=user)
-     return render_template('404.html')
+        return render_template('update_profile.html', form=form, user=user)
+    return render_template('404.html')
     
 
 
-@views.route('/caloriecounter')
-@login_required
-def calorie_counter():
-
-    activity_log = Activity.query.filter_by(customer_link = current_user.id).order_by(desc(Activity.date_added)).all()
-    food_log = Order.query.filter_by(customer_link = current_user.id).order_by(desc(Order.date_created)).all()
-    
-    activity_grouped = defaultdict(list)
-    total_calories_consumed = defaultdict(float)
-    total_calories_burned = defaultdict(float)
-
-    for activity in activity_log:
-        year = activity.date_added.year
-        month = activity.date_added.month
-        day = activity.date_added.day
-
-        date_obj = datetime(year, month, day)
-        date_format = date_obj.strftime("%Y/%m/%d")
-
-        activity_grouped[date_format].append(activity)
-        total_calories_burned[date_format] += activity.calorie_burned
-    
-    
-    for order in food_log:
-        year = order.date_created.year
-        month = order.date_created.month
-        day = order.date_created.day
-
-        date_obj = datetime(year, month, day)
-        date_format = date_obj.strftime("%Y/%m/%d")
-
-        activity_grouped[date_format].append(order)
-        total_calories_consumed[date_format] += order.calories
-
-
-    routes = Routes.query.all()
-    for route in routes:
-     return render_template('caloriecounter.html', total_calories_burned = total_calories_burned, activity_grouped=activity_grouped, total_calories_consumed=total_calories_consumed)
 
 @views.route('/stepcounter', methods=['GET', 'POST'])
 @login_required
@@ -157,6 +137,7 @@ def record_step_counter(routes_id):
             new_activity = Activity(
                 customer_link=current_user.id,
                 routes_id=routes_id,
+                steps = routes_to_record.steps,
                 calorie_burned=routes_to_record.calories,
                 date_added=datetime.now()
             )
@@ -210,6 +191,31 @@ def cart(product_id):
     return redirect(request.referrer)
 
 
+@views.route('/remove-cart-product/<int:product_id>')
+@login_required
+def remove_cart_product(product_id):
+    try:
+        cart_item = Cart.query.filter_by(product_link=product_id, customer_link=current_user.id).first()
+        if cart_item:
+            if cart_item.quantity > 1:
+                cart_item.quantity -= 1
+                db.session.commit()
+                flash(f'Quantity of {cart_item.product.product_name} has been updated')
+            else:
+                db.session.delete(cart_item)
+                db.session.commit()
+                flash(f'{cart_item.product.product_name} has been removed from the cart')
+        else:
+            flash('Product not found in your cart')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Failed to update cart: {str(e)}')
+    
+    return redirect(request.referrer)
+     
+
+
+
 @views.route('/cart')
 @login_required
 def show_cart():
@@ -223,19 +229,6 @@ def show_cart():
 
     return render_template('cart.html', cart=cart_items, total_calories=total_calories,  total_price=total_price)
 
-
-@views.route('/pluscart')
-@login_required
-def plus_cart():
-    if request.method == 'GET':
-        cart_id = request.args.get('cart_id')
-        print(cart_id)
-
-        data = {
-            'Response':'Backend Response'
-        }
-
-        return jsonify(data)
     
 
 @views.route('/place-order')
@@ -307,7 +300,7 @@ def history():
 @views.route('/activity_log')
 @login_required
 def activity_log():
-
+    user = User.query.filter_by(id=current_user.id).first()
     
     activity_log = Activity.query.filter_by(customer_link = current_user.id).order_by(desc(Activity.date_added)).all()
     food_log = Order.query.filter_by(customer_link = current_user.id).order_by(desc(Order.date_created)).all()
@@ -340,7 +333,11 @@ def activity_log():
         total_calories_consumed[date_format] += order.calories
         
 
-    return render_template('activitylog.html', total_calories_burned = total_calories_burned, activity_grouped=activity_grouped, total_calories_consumed=total_calories_consumed)
+    return render_template('activitylog.html',
+                           user=user, 
+                           total_calories_burned = total_calories_burned, 
+                           activity_grouped=activity_grouped, 
+                           total_calories_consumed=total_calories_consumed)
 
 
 

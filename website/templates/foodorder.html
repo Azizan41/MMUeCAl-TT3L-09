@@ -1,62 +1,47 @@
-
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr" style="background-color: #fff;"  >
-    <head>
-        <meta charset="utf-8">
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"rel="stylesheet"/>
-        <link rel="stylesheet" href="/static/style_foodorder.css" />
-        <title>FOOD ORDER</title>
-    </head>
-    <body>
-
-               
-
-
-        <div class="menu">
-            <div class="heading"> 
-                <div class="cart_icon">
-                 {% if cart | length < 1 %}
-                 <a class="" href="/cart" ><span class=""></span><i class="ri-shopping-cart-line"></i></a>
-                 {% else %}
-                 <br>
-                 <a class="" href="/cart" ><span class=""></span><i class="ri-shopping-cart-line"></i><i class="ri-number-{{ cart | length }}"></i></a>
-                 {% endif %}
-                 </div>
-                <h1>Order</h1>
-                <h3>Menu</h3>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/static/style_foodorder.css"/>
+    <title>FOOD ORDER</title>
+</head>
+<body>
+    <div class="menu">
+        <div class="heading">
+            <div class="cart_icon">
+                {% if cart | length < 1 %}
+                <a href="/cart"><i class="ri-shopping-cart-line"></i></a>
+                {% else %}
+                <a href="/cart"><i class="ri-shopping-cart-line"></i><span class="cart-count">{{ cart | length }}</span></a>
+                {% endif %}
             </div>
-
-     
-            {% for food in foods %}
-
-            <div class="food-items">
-                <ul>
-                <li class="food-listing">
-                <img src="{{ food.product_picture }}">
-                <div class="details">
-                    <div class="details-sub">
-                        <h5>{{ food.product_name }}</h5>
-                        <h5 class="price">RM {{ food.product_price }}</h5>
-                        <h6 class="stock">{{ food.in_stock }} available </h6>
-                        <h6 class="calorie">{{ food.product_calorie }} calories </h6>
-                    </div>
-                    <p>Food details</p>
-                    <a  href="/cart/{{ food.id }}" ><button>Add to Cart</button></a>
-                </li>
-                </ul>
-                </div>
+            <h1>Order</h1>
+            <h3>Menu</h3>
+            <div class="back-button">
+                <a href="/home"><i class="ri-corner-down-left-line"></i></a>
             </div>
-
-            {% endfor %}
-
         </div>
 
-        
-
-        
-           
-
-            
-    </body>
+        {% for food in foods %}
+        <div class="food-items">
+            <ul>
+                <li class="food-listing">
+                    <img src="{{ food.product_picture }}">
+                    <div class="details">
+                        <div class="details-sub">
+                            <h5>{{ food.product_name }}</h5>
+                            <h5 class="price">RM {{ food.product_price }}</h5>
+                            <h6 class="stock">{{ food.in_stock }} available</h6>
+                            <h6 class="calorie">{{ food.product_calorie }} calories</h6>
+                        </div>
+                        <p>Food details</p>
+                        <a href="/cart/{{ food.id }}"><button>Add to Cart</button></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</body>
 </html>
