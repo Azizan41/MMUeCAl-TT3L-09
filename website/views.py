@@ -5,7 +5,7 @@ from . import db
 import sqlite3
 from sqlalchemy import desc
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, date
 from .forms import UpdateProfile
 
 views = Blueprint('views', __name__)
@@ -47,7 +47,10 @@ def foodorder():
 def profile():
     user = User.query.filter_by(id=current_user.id).first()
 
-    steps_log = Activity.query.filter_by(customer_link = current_user.id).order_by(desc(Activity.date_added)).all()
+    current_date = date.today()
+
+    steps_log = Activity.query.filter(Activity.customer_link == current_user.id,
+                                      Activity.date_added == current_date).order_by(desc(Activity.date_added)).all()
 
     steps_grouped = defaultdict(list)
     total_steps_accumulated = defaultdict(int)
@@ -63,10 +66,17 @@ def profile():
         steps_grouped[date_format].append(steps)
         total_steps_accumulated[date_format] += steps.steps
 
+    if current_date.strftime("%Y/%m/%d") not in total_steps_accumulated:
+        total_steps_accumulated[current_date.strftime("%Y/%m/%d")] = 0
+
+    steps_grouped = dict(steps_grouped)
+    total_steps_accumulated = dict(total_steps_accumulated)
+
     return render_template('profile.html', 
                            user=user, 
                            steps_grouped=steps_grouped,
-                           total_steps_accumulated=total_steps_accumulated)
+                           total_steps_accumulated=total_steps_accumulated,
+                           current_date=current_date)
 
 
 # Function to update profile info for each user
