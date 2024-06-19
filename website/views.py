@@ -5,7 +5,7 @@ from . import db
 import sqlite3
 from sqlalchemy import desc
 from collections import defaultdict
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from .forms import UpdateProfile
 
 views = Blueprint('views', __name__)
@@ -47,33 +47,33 @@ def foodorder():
 def profile():
     user = User.query.filter_by(id=current_user.id).first()
 
-    current_date = date.today()
+    current_date = date.today()  
+
+    start_date = datetime.combine(current_date, datetime.min.time())
+    end_date = start_date + timedelta(days=1)
 
     steps_log = Activity.query.filter(Activity.customer_link == current_user.id,
-                                      Activity.date_added == current_date).order_by(desc(Activity.date_added)).all()
+                                      Activity.date_added >= start_date,
+                                      Activity.date_added < end_date).order_by(desc(Activity.date_added)).all()
 
     steps_grouped = defaultdict(list)
     total_steps_accumulated = defaultdict(int)
 
     for steps in steps_log:
-        year = steps.date_added.year
-        month = steps.date_added.month
-        day = steps.date_added.day
-
-        date_obj = datetime(year, month, day)
-        date_format = date_obj.strftime("%Y/%m/%d")
+        # Group steps by date without time 
+        date_format = steps.date_added.date()
 
         steps_grouped[date_format].append(steps)
         total_steps_accumulated[date_format] += steps.steps
 
-    if current_date.strftime("%Y/%m/%d") not in total_steps_accumulated:
-        total_steps_accumulated[current_date.strftime("%Y/%m/%d")] = 0
+    if current_date not in total_steps_accumulated:
+        total_steps_accumulated[current_date] = 0
 
     steps_grouped = dict(steps_grouped)
     total_steps_accumulated = dict(total_steps_accumulated)
 
-    return render_template('profile.html', 
-                           user=user, 
+    return render_template('profile.html',
+                           user=user,
                            steps_grouped=steps_grouped,
                            total_steps_accumulated=total_steps_accumulated,
                            current_date=current_date)
