@@ -30,12 +30,12 @@
                     <img src="{{ food.product_picture }}">
                     <div class="details">
                         <div class="details-sub">
+                            <p>Details</p>
                             <h5>{{ food.product_name }}</h5>
                             <h5 class="price">RM {{ food.product_price }}</h5>
                             <h6 class="stock">{{ food.in_stock }} available</h6>
-                            <h6 class="calorie">{{ food.product_calorie }} calories</h6>
+                            <h6 class="calorie">{{ food.product_calorie }} kcal/100g</h6>
                         </div>
-                        <p>Food details</p>
                         <a href="/cart/{{ food.id }}"><button>Add to Cart</button></a>
                     </div>
                 </li>

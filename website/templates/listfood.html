@@ -7,6 +7,7 @@
             <th scope="'col">ID</th>
             <th scope="'col">Food</th>
             <th scope="'col">Price</th>
+            <th scope="'col">Calorie</th>
             <th scope="'col">Stock</th>
             <th scope="'col">Date Added</th>
             <th scope="'col">Picture</th>
@@ -21,6 +22,7 @@
             <th scope="row">{{ food.id }}</th>
             <td> {{ food.product_name }}</td>
             <td> {{ food.product_price }}</td>
+            <td> {{ food.product_calorie }}</td>
             <td> {{ food.in_stock }}</td>
             <td> {{ food.date_added }}</td>
             <td> <img src="{{ food.product_picture }}" alt="" style= "height: 50px; width: 50px; border: 2px;"></td>
