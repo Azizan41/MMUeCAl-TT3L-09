@@ -89,6 +89,7 @@ def change_password(user_id):
     form = PasswordChangeForm()
 
     user = User.query.get(user_id)
+    user = User.query.filter_by(id=current_user.id).first()
 
 
     

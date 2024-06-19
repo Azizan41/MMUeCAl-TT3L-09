@@ -58,27 +58,8 @@
     </div>
     
 
-        <li><strong>Total Calories burned: {{ total_calories_burned[date]}} kcal</strong></li>
-        <li><strong>Total Calories consumed: {{ total_calories_consumed[date]}} kcal</strong></li>
 
 
-        {% set available_calories = total_calories_consumed[date] - total_calories_burned[date] %}
-        {% if available_calories < 0 %}
-            <li><h3><strong>Available Calories: 0 kcal</strong></h3></li>
-            <li><h3><strong>You Have Consumed Extra {{available_calories * -1}}</strong></h3></li>
-        {% else %}
-            <li><h3><strong>You Still Have: {{ available_calories }} kcal</strong></h3></li>
-            <li><h3><strong>Use your available calories to:</strong></h3>
-                <ul>
-                    <li>Enjoy a healthy snack, such as fruits or nuts</li>
-                    <li>Indulge in a small treat, like a piece of dark chocolate</li>
-                    <li>Save them for a special occasion or event</li>
-                </ul>
-            </li>
-        {% endif %}
 
-
-    {% endfor %}
->>>>>>> 89080a9fcf4d1c200d02f224a0cc5cca11ff906e
 </body>
 </html>

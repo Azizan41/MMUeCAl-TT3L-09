@@ -29,11 +29,9 @@
               <p>Activity Level : <strong> {{ user.activity_level }} </strong> </p>
 
               <br>
-              {% for total_steps in total_steps_accumulated.values() %}
-               <p>You're At <strong>{{ total_steps }} </strong> / 10000 steps</p>
-              {% endfor %}
-
-        
+              
+              <p>You're At <strong>{{ total_steps_accumulated[current_date.strftime("%Y/%m/%d")] }}</strong> / 10000 steps</p>
+       
               <br>
               <p>To Maintain <strong>{{ user.weight }} Kg</strong>,</p> 
    
