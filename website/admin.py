@@ -79,12 +79,14 @@ def update_product(product_id):
         
         form.product_name.render_kw ={'placeholder': food_to_update.product_name}
         form.product_price.render_kw ={'placeholder': food_to_update.product_price}
+        form.in_stock.render_kw ={'placeholder': food_to_update.product_calorie}
         form.in_stock.render_kw ={'placeholder': food_to_update.in_stock}
         
         if form.validate_on_submit():
             product_name = form.product_name.data
             product_price = form.product_price.data
             in_stock = form.in_stock.data
+            product_calorie = form.product_calorie.data
 
             file = form.product_picture.data
 
@@ -96,7 +98,8 @@ def update_product(product_id):
             try:
                 Product.query.filter_by(id=product_id).update(dict(product_name=product_name , 
                                                                    product_price=product_price , 
-                                                                   in_stock=in_stock , 
+                                                                   in_stock=in_stock ,
+                                                                   product_calorie=product_calorie, 
                                                                    product_picture=file_path))
                 db.session.commit()
                 flash (f' {product_name} updated successfully')
@@ -114,18 +117,20 @@ def update_product(product_id):
 @admin.route('/remove-product/<int:product_id>', methods=['GET', 'POST'])
 @login_required
 def remove_product(product_id):
+  
+  product_name = Product.product_name
+
   if current_user.admin == True:
       try:
         print('hello')
         food_to_remove = Product.query.get(product_id)
         db.session.delete(food_to_remove)
         db.session.commit()
-        product_name = Product.product_name
         flash(f'{ product_name } deleted ')
         return redirect('/list_product')
       except Exception as g:
           print('fud dilited')
-          flash(product_name + 'not deleted')
+          flash(f'{product_name} + not deleted')
       return redirect('/list_product')
   return render_template('404.html')
 
